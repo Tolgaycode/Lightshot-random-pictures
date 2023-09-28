@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("btn").addEventListener("click", async function () {
     console.log("Button clicked");
+
+    const loadingDiv = document.querySelector(".lds-roller");
+    loadingDiv.style.display = "inline-block";
+
     // Web scraping operations with Puppeteer
     const srcLink = await getSrcLink();
 
@@ -9,6 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(imgElement);
     imgElement.src = srcLink;
     imgElement.style.display = "block";
+
+    loadingDiv.style.display = "none";
   });
 
   async function getSrcLink() {
