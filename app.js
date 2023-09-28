@@ -1,12 +1,51 @@
-// https://prnt.sc/876157
+const puppeteer = require("puppeteer");
+const express = require("express");
 
+////// Express
+const app = express();
+const port = 3000;
 
-document.getElementById("btn").addEventListener("click", function () {
-  const randomNum = Math.floor(100000 + Math.random() * 900000);
+app.use(express.static("public"));
+app.use(express.json());
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+
+////// Puppeteer
+const webBot = async () => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
 
   // URL'yi ve rasgele rakamı birleştirme
+  const randomNum = Math.floor(100000 + Math.random() * 900000);
   const baseUrl = "https://prnt.sc/";
-  const finalUrl = baseUrl + randomNum;
+  const targetUrl = baseUrl + randomNum;
+  console.log(targetUrl);
 
-  console.log(finalUrl);
+  await page.goto(targetUrl);
 
+  await page.waitForSelector("#screenshot-image");
+
+  const element = await page.$("#screenshot-image");
+  const srcLink = await element.evaluate((el) => el.getAttribute("src"));
+  console.log(srcLink);
+  console.log(typeof srcLink);
+
+  await browser.close();
+
+  return srcLink; // srcLink'i döndür
+};
+
+app.get("/scrape", async (req, res) => {
+  try {
+    const srcLink = await webBot();
+    res.json({ srcLink });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Scraping failed" });
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Uygulama ${port} portunda çalışıyor.`);
+});

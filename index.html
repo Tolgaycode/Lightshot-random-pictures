@@ -2,8 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="referrer" content="no-referrer" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,400;1,800&display=swap"
       rel="stylesheet"
@@ -19,8 +27,36 @@
     <p id="generatedLink"></p>
     <p id="imgSrcResult"></p>
     <div class="imgdiv">
-      <img src="" alt="img" />
+      <img class="img" src="" alt="img" />
     </div>
-    <script type="module" src="app.js"></script>
+    <script>
+      // https://prnt.sc/876157
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .getElementById("btn")
+          .addEventListener("click", async function () {
+            console.log("Button clicked");
+            // Puppeteer ile web scraping işlemleri
+            const srcLink = await getSrcLink();
+
+            // Elde edilen srcLink'i HTML sayfasındaki img elementine eklemek
+            const imgElement = await document.querySelector(".img");
+            console.log(imgElement);
+            imgElement.src = srcLink;
+
+            // Diğer işlemler (örneğin, kaynak bağlantısını görüntüleme)
+            const generatedLink = document.getElementById("generatedLink");
+            generatedLink.textContent = "Generated Link: " + srcLink;
+            const imgSrcResult = document.getElementById("imgSrcResult");
+            imgSrcResult.textContent = "Image Source: " + srcLink;
+          });
+
+        async function getSrcLink() {
+          const response = await fetch("/scrape"); // Express.js sunucusuna istek gönderme
+          const data = await response.json();
+          return data.srcLink;
+        }
+      });
+    </script>
   </body>
 </html>
