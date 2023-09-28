@@ -7,6 +7,8 @@ const port = 3000;
 
 app.use(express.static("public"));
 app.use(express.json());
+app.use("/css", express.static("css"));
+app.use("/js", express.static("js"));
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
@@ -28,12 +30,10 @@ const webBot = async () => {
 
   const element = await page.$("#screenshot-image");
   const srcLink = await element.evaluate((el) => el.getAttribute("src"));
-  console.log(srcLink);
-  console.log(typeof srcLink);
 
   await browser.close();
 
-  return srcLink; // srcLink'i döndür
+  return srcLink; // srcLink
 };
 
 app.get("/scrape", async (req, res) => {
@@ -47,5 +47,5 @@ app.get("/scrape", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Uygulama ${port} portunda çalışıyor.`);
+  console.log(`App working on ${port} port.`);
 });
