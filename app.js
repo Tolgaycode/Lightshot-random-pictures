@@ -35,7 +35,6 @@ const webBot = async () => {
   const srcLink = await element.evaluate((el) => el.getAttribute("src"));
 
   await browser.close();
-
   return srcLink; // srcLink
 };
 

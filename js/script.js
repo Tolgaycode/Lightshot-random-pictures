@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("btn").addEventListener("click", async function () {
     console.log("Button clicked");
+    this.disabled = true;
 
     const loadingDiv = document.querySelector(".lds-roller");
     loadingDiv.style.display = "inline-block";
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     imgElement.src = srcLink;
     imgElement.style.display = "block";
 
+    this.disabled = false;
     loadingDiv.style.display = "none";
   });
 

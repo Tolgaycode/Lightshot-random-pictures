@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "express": "^4.18.2",
-    "puppeteer": "^21.3.5"  
+    "puppeteer": "^21.3.5"
   },
   "name": "lightshot-random-pictures",
   "description": "![Project Status](https://img.shields.io/badge/status-completed-brightgreen.svg)\r ![First Project](https://img.shields.io/badge/My%20First%20Project-Yes-brightgreen.svg)\r ![License](https://img.shields.io/badge/license-MIT-blue.svg)",
