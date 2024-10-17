@@ -32,7 +32,7 @@ git clone https://github.com/Tolgaycode/Lightshot-random-pictures.git
 2. Navigate to the project folder:
 
 ```sh
-cd coingecko-search-input
+cd Lightshot-random-pictures
 ```
 
 3. Install the required dependencies:
