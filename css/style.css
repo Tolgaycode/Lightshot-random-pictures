@@ -178,3 +178,21 @@ margin: 10px ;
     transform: rotate(360deg);
   }
 }
+
+
+/* Footer Styling */
+.footer {
+
+  color: #E1AA7D; /* White text */
+  text-align: center;
+  padding: 20px 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+}
+
+.footer p {
+  margin: 0;
+}
