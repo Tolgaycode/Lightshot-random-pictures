@@ -179,6 +179,14 @@ margin: 10px ;
   }
 }
 
+.wait {
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  padding-top: 20px;
+  text-align: center;
+}
+
 
 /* Footer Styling */
 .footer {
